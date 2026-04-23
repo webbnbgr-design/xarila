@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Δικηγορικό Γραφείο Ευθυμίας Η. Χαρίλα - Λαμία</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    
+    <!-- Lucide Icons (via unpkg for plain HTML) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            50: '#f1f5f9',
+                            100: '#e2e8f0',
+                            200: '#cbd5e1',
+                            300: '#94a3b8',
+                            400: '#64748b',
+                            500: '#475569',
+                            600: '#334155',
+                            700: '#1e293b',
+                            800: '#0f172a',
+                            900: '#020617',
+                        },
+                    },
+                    boxShadow: {
+                        'premium': '0 20px 50px rgba(8, 112, 184, 0.07)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes mesh {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .mesh-gradient {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #020617);
+            background-size: 400% 400%;
+            animation: mesh 15s ease infinite;
+        }
+
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #0f172a, #64748b);
+        }
+
+        .bento-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+            border-color: #cbd5e1;
+        }
+
+        .premium-shadow {
+            box-shadow: 0 20px 50px rgba(8, 112, 184, 0.07);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-white text-navy-800 font-sans selection:bg-navy-100 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group transition-transform hover:scale-[1.02]">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-navy-800 text-white rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
+                    <i data-lucide="scale" class="w-6 h-6"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg md:text-xl tracking-tight leading-none text-navy-800">ΕΥΘΥΜΙΑ Η. ΧΑΡΙΛΑ</span>
+                    <span class="text-[10px] md:text-[11px] uppercase tracking-[0.25em] font-semibold text-navy-400 mt-1">Δικηγόρος παρ' Αρείω Πάγω</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center gap-10">
+                <a href="#about" class="text-sm font-semibold text-navy-600 hover:text-navy-900 transition-colors">Η Δικηγόρος</a>
+                <a href="#services" class="text-sm font-semibold text-navy-600 hover:text-navy-900 transition-colors">Υπηρεσίες</a>
+                <a href="#coverage" class="text-sm font-semibold text-navy-600 hover:text-navy-900 transition-colors">Πανελλαδική Δράση</a>
+                <a href="#contact" class="text-sm font-semibold text-navy-600 hover:text-navy-900 transition-colors">Επικοινωνία</a>
+                <a href="tel:2231030850" class="bg-navy-800 text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-navy-700 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-navy-800/10 flex items-center gap-2">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    22310 30850
+                </a>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button id="mobileMenuBtn" class="lg:hidden p-2 text-navy-800">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 lg:hidden px-8 py-12">
+        <button id="closeMenuBtn" class="absolute top-8 right-8 p-2 text-navy-800">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div class="flex flex-col gap-8 mt-16">
+            <a href="#about" class="text-3xl font-bold text-navy-900">Η Δικηγόρος</a>
+            <a href="#services" class="text-3xl font-bold text-navy-900">Υπηρεσίες</a>
+            <a href="#coverage" class="text-3xl font-bold text-navy-900">Πανελλαδική Δράση</a>
+            <a href="#contact" class="text-3xl font-bold text-navy-900">Επικοινωνία</a>
+            <div class="mt-8 pt-8 border-t border-gray-100 space-y-4">
+                <a href="tel:2231030850" class="block text-xl font-bold text-navy-800 flex items-center gap-3">
+                    <i data-lucide="phone" class="w-6 h-6"></i>
+                    22310 30850
+                </a>
+                 <a href="tel:6974095261" class="block text-xl font-bold text-navy-800 flex items-center gap-3">
+                    <i data-lucide="phone" class="w-6 h-6"></i>
+                    69740 95261
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center pt-24 overflow-hidden">
+        <!-- Background Animation -->
+        <div class="absolute inset-0 mesh-gradient opacity-[0.03] -z-10"></div>
+        <div class="absolute top-1/4 right-0 w-[500px] h-[500px] bg-navy-100 rounded-full blur-[100px] opacity-30 -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7" data-aos="fade-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-50 border border-navy-100 text-navy-600 text-xs font-bold mb-8 uppercase tracking-widest shadow-sm">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        Elite Legal Services
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] mb-10 text-gradient font-display">
+                        Ευθυμία Η. Χαρίλα:<br>
+                        <span class="text-navy-900">Νομική Εκπροσώπηση παρ' Αρείω Πάγω </span>
+                    </h1>
+                    <p class="text-xl text-navy-500 mb-12 max-w-xl leading-relaxed">
+                        Υπηρεσίες Υψηλού Επιπέδου με Πανελλαδική Εμβέλεια. Διασφαλίζουμε την ανώτατη εκπροσώπηση της υπόθεσής σας στα Ελληνικά Δικαστήρια.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
+                        <a href="#contact" class="bg-navy-800 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-navy-700 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-navy-800/20 flex items-center gap-3">
+                            Προγραμματίστε μια Συμβουλευτική Συνεδρία
+                            <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                        </a>
+                        <div class="flex items-center gap-4 py-3 px-5 border border-navy-100 rounded-2xl bg-white/50 backdrop-blur-sm">
+                            <i data-lucide="phone-call" class="w-8 h-8 text-navy-400"></i>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold text-navy-400 uppercase tracking-widest">Τηλέφωνο Γραφείου</span>
+                                <a href="tel:2231030850" class="text-xl font-bold text-navy-800">22310 30850</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5 relative" data-aos="fade-left" data-aos-delay="200">
+                    <div class="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-premium group">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Professional Legal Office" 
+                             class="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <div class="p-6 backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl text-white">
+                                <p class="text-xs font-semibold uppercase tracking-widest opacity-80 mb-2">Τοποθεσία</p>
+                                <p class="text-2xl font-bold font-display">Λεωνίδου 6, Λαμία</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Absolute Decorative Icons -->
+                    <div class="absolute -top-6 -right-6 w-24 h-24 bg-white rounded-3xl premium-shadow flex items-center justify-center -rotate-12 border border-gray-50 z-20">
+                        <i data-lucide="gavel" class="w-10 h-10 text-navy-800"></i>
+                    </div>
+                     <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-navy-800 rounded-3xl shadow-2xl flex items-center justify-center rotate-6 z-20">
+                        <div class="text-center text-white">
+                            <p class="text-3xl font-bold">20+</p>
+                            <p class="text-[10px] uppercase font-bold tracking-widest opacity-70">Έτη Εμπειρίας</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supreme Court Section -->
+    <section class="py-24 bg-navy-900 text-white relative overflow-hidden" id="about">
+        <!-- Abstract Scale Background -->
+        <i data-lucide="scale" class="absolute -bottom-40 -left-40 w-[600px] h-[600px] text-white opacity-[0.02] rotate-12"></i>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div data-aos="fade-up">
+                    <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-10 font-display">
+                        Εκπροσώπηση στον <span class="text-navy-400">Άρειο Πάγο</span>
+                    </h2>
+                    <p class="text-lg text-navy-300 leading-relaxed mb-12">
+                        Η ιδιότητα "παρ' Αρείω Πάγω" αποτελεί την ανώτατη τιμητική και βαθμιαία αναγνώριση ενός δικηγόρου στην Ελλάδα. Διασφαλίζει ότι η υπόθεσή σας τυγχάνει του υψηλότερου δυνατού επιπέδου νομικής θεμελίωσης, τόσο σε ουσιαστικό όσο και σε δικονομικό επίπεδο.
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-8">
+                        <div class="flex flex-col gap-4">
+                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-white border border-white/10">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">Απόλυτη Ασφάλεια</h4>
+                            <p class="text-sm text-navy-400">Χειρισμός κρίσιμων υποθέσεων με αδιαμφισβήτητο κύρος.</p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-white border border-white/10">
+                                <i data-lucide="target" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">Νομική Ακρίβεια</h4>
+                            <p class="text-sm text-navy-400">Εστίαση στη λεπτομέρεια που καθορίζει το αποτέλεσμα.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="zoom-in">
+                    <div class="relative z-10 rounded-[2.5rem] overflow-hidden border-8 border-white/5 shadow-2xl">
+                         <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Legal Books" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -top-10 -right-10 w-64 h-64 bg-navy-500/20 rounded-full blur-[80px]"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Bento Grid -->
+    <section class="py-24 bg-gray-50" id="services">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-xs uppercase tracking-[0.4em] font-extrabold text-navy-400 mb-4 block">Comprehensive Expertise</span>
+                <h2 class="text-4xl md:text-6xl font-bold text-navy-900 font-display">Πολυδιάστατη Νομική Κάλυψη</h2>
+                <p class="text-navy-500 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">Ολιστική κάλυψη σε κάθε τομέα δικαίου με υπηρεσίες υψηλού επιπέδου για ιδιώτες και επιχειρήσεις.</p>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[800px]">
+                <!-- Large Item 1 -->
+                <div class="md:col-span-2 md:row-span-2 bg-white rounded-[2.5rem] p-12 bento-card border border-gray-100 flex flex-col justify-between" data-aos="fade-up">
+                    <div>
+                        <div class="w-16 h-16 bg-navy-50 text-navy-800 rounded-2xl flex items-center justify-center mb-8">
+                            <i data-lucide="landmark" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-navy-900 mb-6 font-display">Αστικό & Εμπορικό Δίκαιο</h3>
+                        <p class="text-navy-500 text-lg leading-relaxed mb-8">
+                            Εξειδικευμένες λύσεις σε θέματα ακινήτων, κληρονομικών, οικογενειακών διαφορών και εταιρικής διακυβέρνησης.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3 text-navy-700 font-medium italic">
+                                <div class="w-2 h-2 bg-navy-300 rounded-full"></div> 
+                                Κτηματολογικές Διαφορές
+                            </li>
+                            <li class="flex items-center gap-3 text-navy-700 font-medium italic">
+                                <div class="w-2 h-2 bg-navy-300 rounded-full"></div> 
+                                Εμπορικές Συμβάσεις & Εταιρείες
+                            </li>
+                            <li class="flex items-center gap-3 text-navy-700 font-medium italic">
+                                <div class="w-2 h-2 bg-navy-300 rounded-full"></div> 
+                                Διαζύγια & Επιμέλεια Τέκνων
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Horizontal Item -->
+                <div class="md:col-span-2 bg-navy-800 text-white rounded-[2.5rem] p-12 bento-card relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="users" class="absolute -bottom-10 -right-10 w-64 h-64 text-white opacity-[0.03]"></i>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-8">
+                            <i data-lucide="balance-scale" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4 font-display">Ποινικό Δίκαιο</h3>
+                        <p class="text-navy-300 text-lg leading-relaxed">
+                            Μαχητική υπεράσπιση και παράσταση σε υποθέσεις πλημμελημάτων και κακουργημάτων σε κάθε βαθμό δικαιοδοσίας.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Small Square 1 -->
+                <div class="bg-white rounded-[2.5rem] p-10 bento-card border border-gray-100 flex flex-col justify-center text-center items-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-navy-50 text-navy-700 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="file-text" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 font-display">Διοικητικό Δίκαιο</h3>
+                    <p class="text-navy-400 text-sm mt-3">Διαφορές με το Δημόσιο & Φορολογικά</p>
+                </div>
+
+                <!-- Small Square 2 -->
+                <div class="bg-white rounded-[2.5rem] p-10 bento-card border border-gray-100 flex flex-col justify-center text-center items-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-navy-50 text-navy-700 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="briefcase" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 font-display">Εργατικό Δίκαιο</h3>
+                    <p class="text-navy-400 text-sm mt-3">Διασφάλιση Εργασιακών Δικαιωμάτων</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nationwide Section -->
+    <section class="py-24 bg-white relative overflow-hidden" id="coverage">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-navy-800 rounded-[4rem] p-16 md:p-24 text-white relative overflow-hidden">
+                <div class="absolute inset-0 mesh-gradient opacity-10"></div>
+                <div class="grid lg:grid-cols-12 gap-16 items-center relative z-10">
+                    <div class="lg:col-span-7" data-aos="fade-right">
+                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-bold mb-8 uppercase tracking-widest">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            National Presence
+                        </div>
+                        <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-8 font-display">
+                            Πανελλαδική <br> <span class="text-navy-400">Νομική Εκπροσώπηση</span>
+                        </h2>
+                        <p class="text-navy-300 text-lg sm:text-xl leading-relaxed mb-12 max-w-xl">
+                            Το γραφείο μας καταρρίπτει τα τοπικά σύνορα, αναλαμβάνοντας υποθέσεις σε οποιοδήποτε σημείο της Ελλάδας. Από τη Λαμία μέχρι την Αθήνα και τα ακριτικά νησιά μας, προσφέρουμε νομική παράσταση υψηλής ποιότητας.
+                        </p>
+                        <div class="flex flex-wrap gap-10">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20">
+                                    <i data-lucide="check-circle" class="w-7 h-7 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold font-display">100%</p>
+                                    <p class="text-xs text-navy-400 uppercase tracking-widest">Ελλάδα</p>
+                                </div>
+                            </div>
+                             <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20">
+                                    <i data-lucide="globe" class="w-7 h-7 text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold font-display">Online</p>
+                                    <p class="text-xs text-navy-400 uppercase tracking-widest">Συμβουλευτική</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 hidden lg:block" data-aos="zoom-in">
+                        <div class="relative w-full aspect-square">
+                            <div class="absolute inset-0 bg-navy-500 rounded-full blur-[120px] opacity-20 animate-pulse"></div>
+                            <svg viewBox="0 0 200 200" class="w-full h-full text-white/10 fill-current">
+                                <path d="M40,100 Q100,20 160,100 T40,180" class="pointer-events-none" />
+                            </svg>
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/5 border border-white/10 rounded-full flex items-center justify-center">
+                                <div class="w-32 h-32 bg-white/10 border border-white/20 rounded-full flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-12 h-12 text-white animate-bounce"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section class="py-24 bg-white selection:bg-navy-900 selection:text-white" id="contact">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-stretch">
+                <div data-aos="fade-up">
+                    <span class="text-xs uppercase tracking-[0.4em] font-extrabold text-navy-400 mb-4 block">Get in Touch</span>
+                    <h2 class="text-4xl md:text-6xl font-bold text-navy-900 mb-10 font-display">Επικοινωνήστε Μαζί μας</h2>
+                    <p class="text-navy-500 text-lg leading-relaxed mb-16 max-w-lg">
+                        Είμαστε εδώ για να συζητήσουμε την υπόθεσή σας και να σχεδιάσουμε τη βέλτιστη στρατηγική για τη δικαίωσή σας.
+                    </p>
+                    
+                    <div class="space-y-12">
+                        <div class="group flex gap-8">
+                            <div class="w-16 h-16 bg-navy-50 rounded-2xl flex items-center justify-center text-navy-800 transition-colors group-hover:bg-navy-800 group-hover:text-white shrink-0">
+                                <i data-lucide="map-pin" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-[0.2em] font-bold text-navy-400 mb-2">Διεύθυνση Γραφείου</h4>
+                                <p class="text-2xl font-bold text-navy-900">Λεωνίδου 6, Λαμία, Τ.Κ. 35131</p>
+                            </div>
+                        </div>
+                        
+                        <div class="group flex gap-8">
+                            <div class="w-16 h-16 bg-navy-50 rounded-2xl flex items-center justify-center text-navy-800 transition-colors group-hover:bg-navy-800 group-hover:text-white shrink-0">
+                                <i data-lucide="phone" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-[0.2em] font-bold text-navy-400 mb-2">Τηλεφωνική Επικοινωνία</h4>
+                                <div class="space-y-1">
+                                    <a href="tel:2231030850" class="block text-2xl font-bold text-navy-900 hover:text-navy-600 transition-colors">22310 30850</a>
+                                    <a href="tel:6974095261" class="block text-2xl font-bold text-navy-900 hover:text-navy-600 transition-colors">69740 95261</a>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="group flex gap-8">
+                            <div class="w-16 h-16 bg-navy-50 rounded-2xl flex items-center justify-center text-navy-800 transition-colors group-hover:bg-navy-800 group-hover:text-white shrink-0">
+                                <i data-lucide="mail" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs uppercase tracking-[0.2em] font-bold text-navy-400 mb-2">Ηλεκτρονικό Ταχυδρομείο</h4>
+                                <a href="mailto:info@charila-law.gr" class="text-2xl font-bold text-navy-900 hover:text-navy-600 transition-colors lowercase">info@charila-law.gr</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="fade-left">
+                    <div class="absolute inset-0 bg-navy-100 rounded-[3rem] -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
+                    <div class="relative bg-white h-full min-h-[500px] rounded-[3rem] shadow-premium overflow-hidden border border-gray-100 p-2">
+                        <!-- Custom Map Interaction Placeholder -->
+                        <div class="w-full h-full bg-gray-50 flex items-center justify-center relative group">
+                            <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2066&auto=format&fit=crop" 
+                                 alt="Map View" 
+                                 class="w-full h-full object-cover opacity-50 grayscale contrast-125 transition-transform duration-[15s] scale-105 group-hover:scale-110">
+                            <div class="absolute flex flex-col items-center gap-5 text-center">
+                                <div class="w-20 h-20 bg-navy-800 text-white rounded-full flex items-center justify-center shadow-2xl animate-bounce">
+                                    <i data-lucide="map-pin" class="w-10 h-10"></i>
+                                </div>
+                                <div class="bg-white/90 backdrop-blur px-8 py-4 rounded-full shadow-2xl border border-white/50">
+                                    <p class="text-navy-900 font-bold text-lg font-display">Λεωνίδου 6, Λαμία</p>
+                                    <p class="text-xs text-navy-400 font-bold uppercase tracking-widest mt-1">Visit Our Office</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-white text-navy-900 rounded-xl flex items-center justify-center shadow-lg">
+                            <i data-lucide="scale" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-display tracking-tight uppercase">ΕΥΘΥΜΙΑ Η. ΧΑΡΙΛΑ</h3>
+                    </div>
+                    <p class="text-navy-400 text-lg leading-relaxed max-w-md italic font-light">
+                        "Η επιτυχία μιας υπόθεσης θεμελιώνεται στην ακρίβεια της στρατηγικής και στο κύρος της εκπροσώπησης. Δεσμευόμαστε για το βέλτιστο αποτέλεσμα σε κάθε στάδιο της νομικής διαδικασίας."
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm uppercase tracking-widest font-bold text-white mb-10">Χρήσιμοι Σύνδεσμοι</h4>
+                    <ul class="space-y-6">
+                        <li><a href="#about" class="text-navy-400 hover:text-white transition-colors flex items-center gap-3 group">
+                            <div class="w-1 h-1 bg-navy-600 rounded-full group-hover:bg-white transition-colors"></div>
+                            Η Δικηγόρος
+                        </a></li>
+                        <li><a href="#services" class="text-navy-400 hover:text-white transition-colors flex items-center gap-3 group">
+                            <div class="w-1 h-1 bg-navy-600 rounded-full group-hover:bg-white transition-colors"></div>
+                            Τομείς Δικαίου
+                        </a></li>
+                        <li><a href="#coverage" class="text-navy-400 hover:text-white transition-colors flex items-center gap-3 group">
+                            <div class="w-1 h-1 bg-navy-600 rounded-full group-hover:bg-white transition-colors"></div>
+                            Πανελλαδική Δράση
+                        </a></li>
+                        <li><a href="#contact" class="text-navy-400 hover:text-white transition-colors flex items-center gap-3 group">
+                            <div class="w-1 h-1 bg-navy-600 rounded-full group-hover:bg-white transition-colors"></div>
+                            Επικοινωνία
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm uppercase tracking-widest font-bold text-white mb-10">Στοιχεία Επικοινωνίας</h4>
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5">
+                            <i data-lucide="phone-forwarded" class="w-6 h-6 text-navy-400"></i>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold tracking-widest text-navy-500 mb-1">Τηλέφωνο</p>
+                                <p class="font-bold">22310 30850</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <i data-lucide="map" class="w-6 h-6 text-navy-400"></i>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold tracking-widest text-navy-500 mb-1">Τοποθεσία</p>
+                                <p class="font-bold">Λαμία, Λεωνίδου 6</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                <p class="text-navy-600 text-sm font-medium">
+                    © 2026 Δικηγορικό Γραφείο Ευθυμίας Η. Χαρίλα. All rights reserved.
+                </p>
+                <div class="flex gap-10">
+                    <a href="#" class="text-xs uppercase tracking-widest font-extrabold text-navy-600 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="text-xs uppercase tracking-widest font-extrabold text-navy-600 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 900,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        const closeMenu = () => {
+            mobileMenu.classList.add('translate-x-full');
+        };
+
+        closeMenuBtn.addEventListener('click', closeMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('py-2', 'shadow-premium');
+                header.classList.remove('h-24');
+            } else {
+                header.classList.remove('py-2', 'shadow-premium');
+                header.classList.add('h-24');
+            }
+        });
+    </script>
+</body>
+</html>
